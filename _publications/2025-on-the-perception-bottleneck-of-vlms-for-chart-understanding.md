@@ -3,7 +3,7 @@ title: 'On the Perception Bottleneck of VLMs for Chart Understanding'
 collection: publications
 category: arxiv
 permalink: /publications/perception-bottleneck-vlm-chart-understanding/
-date: '2025'
+year: '2025'
 order: 2
 venue: 'Arxiv'
 excerpt: 'First author. Co-authors: Weihao Zeng, Xiwen Zhang, Yijun Wang, Zifei Shan, Junxian He. Has GitHub code repository: Vision4Chart.'
