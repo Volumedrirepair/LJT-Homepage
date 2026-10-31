@@ -8,7 +8,7 @@ url: "https://volumedrirepair.github.io"
 baseurl: "/LJT-Homepage"
 repository: "Volumedrirepair/LJT-Homepage"
 
-author: {"avatar":"profile.png","name":"Junteng Liu","bio":"First-year PhD candidate at HKUST NLP Group","employer":"Hong Kong University of Science and Technology","email":"jliugi@connect.ust.hk","googlescholar":"https://scholar.google.com/citations?hl=en&user=tbK9jl4AAAAJ&view_op=list_works&sortby=pubdate","github":"Vicent0205","twitter":"junteng88716710"}
+author: {"avatar":"profile.svg","name":"Junteng Liu","bio":"First-year PhD candidate at HKUST NLP Group","employer":"Hong Kong University of Science and Technology","email":"jliugi@connect.ust.hk","googlescholar":"https://scholar.google.com/citations?hl=en&user=tbK9jl4AAAAJ&view_op=list_works&sortby=pubdate","github":"Vicent0205","twitter":"junteng88716710"}
 
 publication_category: {"arxiv":{"title":"Arxiv"},"conferences":{"title":"Conference Papers"}}
 
@@ -24,8 +24,57 @@ social: {"type":"Person","name":"Junteng Liu","links":["https://github.com/Vicen
 analytics: {"provider":"false","google":{"tracking_id":null}}
 
 include: [".htaccess", "_pages", "files"]
-exclude: ["*.sublime-project", "*.sublime-workspace", ".asset-cache", ".bundle", ".github", ".jekyll-assets-cache", ".sass-cache", "assets/js/_main.js", "assets/js/plugins", "assets/js/vendor", "CHANGELOG", "Capfile", "config", "Dockerfile", "Gemfile", "Gruntfile.js", "gulpfile.js", "LICENSE", "local", "log", "node_modules", "package.json*", "Rakefile", "README", "tmp", "vendor"]
+exclude:
+  - "*.sublime-project"
+  - "*.sublime-workspace"
+  - ".asset-cache"
+  - ".bundle"
+  - ".devcontainer"
+  - ".github"
+  - ".jekyll-assets-cache"
+  - ".sass-cache"
+  - "assets/js/_main.js"
+  - "assets/js/plugins"
+  - "assets/js/vendor"
+  - "CHANGELOG"
+  - "Capfile"
+  - "config"
+  - "Dockerfile"
+  - "docker-compose.yaml"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "Gruntfile.js"
+  - "gulpfile.js"
+  - "LICENSE"
+  - "local"
+  - "log"
+  - "node_modules"
+  - "package.json*"
+  - "Rakefile"
+  - "README"
+  - "README.md"
+  - "AGENTS.md"
+  - "_config_docker.yml"
+  - "tmp"
+  - "vendor"
+  - "talkmap"
+  - "talkmap.ipynb"
+  - "talkmap.py"
+  - "talkmap_out.ipynb"
+  - "markdown_generator"
+  - "scripts"
+  - "_drafts"
+  - "_posts"
+  - "_talks"
+  - "_teaching"
+  - "_portfolio"
+  - "images/bio-photo.jpg"
+  - "images/bio-photo-2.jpg"
+  - "images/editing-talk.png"
+  - "images/themes"
+  - "images/wiki"
 keep_files: [".git", ".svn"]
+enocding: "utf-8"
 encoding: "utf-8"
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 
@@ -44,8 +93,6 @@ collections:
   talks: {"output":false,"permalink":"/:collection/:path/"}
 
 defaults:
-  - scope: {"path":"","type":"posts"}
-    values: {"layout":"single","author_profile":true,"read_time":true,"comments":false,"share":true,"related":true,"published":false}
   - scope: {"path":"","type":"pages"}
     values: {"layout":"single","author_profile":true}
   - scope: {"path":"","type":"teaching"}
