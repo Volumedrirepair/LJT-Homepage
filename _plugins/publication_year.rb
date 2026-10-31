@@ -1,9 +1,12 @@
-Jekyll::Hooks.register :documents, :post_read do |doc|
-  next unless doc.collection&.label == "publications"
+Jekyll::Hooks.register :site, :post_read do |site|
+  collection = site.collections["publications"]
+  next unless collection
 
-  year = doc.data["year"]
-  if year && doc.data["date"].nil?
-    doc.data["year"] = year.to_s
-    doc.data["date"] = Time.utc(year.to_i, 1, 1)
+  collection.docs.each do |doc|
+    year = doc.data["year"]
+    if year && doc.data["date"].nil?
+      doc.data["year"] = year.to_s
+      doc.data["date"] = Time.utc(year.to_i, 1, 1)
+    end
   end
 end
