@@ -1,0 +1,19 @@
+{
+	"name": "Junteng Liu",
+	"short_name": "Junteng Liu",
+	"description": "First-year PhD candidate at HKUST NLP Group. Research focuses on natural language processing and machine learning, with research interests in LLM reasoning and reinforcement learning, hallucination in vision-language models (VLM), and LLM truthfulness and interpretability.",
+	"start_url": "/LJT-Homepage",
+	"lang": "en-US",
+	"icons": [
+		{
+			"src": "/images/favicon-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/images/favicon-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
+}
