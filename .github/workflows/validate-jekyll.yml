@@ -1,4 +1,4 @@
-name: Validate Jekyll build
+name: Build and deploy gh-pages
 
 on:
   push:
@@ -6,10 +6,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -24,3 +24,56 @@ jobs:
         run: bundle exec jekyll build --baseurl "/LJT-Homepage"
         env:
           JEKYLL_ENV: production
+      - name: Verify generated site
+        run: |
+          set -euxo pipefail
+          test -f _site/index.html
+          test -f _site/publications/index.html
+          test -f _site/publications/synlogic/index.html
+          grep -q "Junteng Liu" _site/index.html
+          grep -q "jliugi@connect.ust.hk" _site/index.html
+          grep -q "Zhiyuan Honor Scholarship" _site/index.html
+          grep -q "SynLogic" _site/index.html
+          ! grep -q "Paper Title Number" _site/index.html
+          ! test -e _site/cv/index.html
+          ! test -e _site/talks/index.html
+          ! test -e _site/teaching/index.html
+          ! test -e _site/portfolio/index.html
+          ! test -e _site/markdown/index.html
+          ! test -e _site/terms/index.html
+          ! find _site/publications -name '*paper-title*' | grep -q .
+          ! find _site -name '*2012-08-14-blog-post-1*' | grep -q .
+          echo 'Generated top-level files:'
+          find _site -maxdepth 1 -type f -printf '%f\n' | sort
+          echo 'Generated publication files:'
+          find _site/publications -type f | sort
+      - name: Deploy built site to gh-pages branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euxo pipefail
+          cd _site
+          touch .nojekyll
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b gh-pages
+          git add .
+          git commit -m "Deploy LJT-Homepage for Junteng Liu"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin gh-pages
+      - name: Check GitHub Pages configuration
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for attempt in 1 2 3 4 5 6; do
+            code=$(curl -sS -o pages.json -w "%{http_code}" \
+              -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages")
+            echo "Attempt ${attempt}: HTTP ${code}"
+            cat pages.json
+            if [ "${code}" = "200" ]; then exit 0; fi
+            sleep 20
+          done
+          exit 0
